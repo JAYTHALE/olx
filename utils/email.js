@@ -14,7 +14,7 @@ const sendEmail = ({ to, subject, message }) => new Promise((resolve, reject) =>
         subject: subject,
         html: message,
         text: message
-    }, err => {
+    }, (err) => {
         if (err) {
             console.log(err)
             reject(false)
