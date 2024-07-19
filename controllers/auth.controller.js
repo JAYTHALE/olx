@@ -15,6 +15,7 @@ const jwt = require("jsonwebtoken")
 const { checkEmpty } = require("../utils/CheckEmpty")
 const Admin = require("../models/Admin")
 const sendEmail = require("../utils/Email")
+// const sendEmail = require("../utils/email")
 
 
 exports.registerAdmin = asyncHandler(async (req, res) => {
