@@ -13,9 +13,9 @@ const validator = require("validator")
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 const { checkEmpty } = require("../utils/CheckEmpty")
+// const { verify } = require("jsonwebtoken")
 const Admin = require("../models/Admin")
 const sendEmail = require("../utils/Email")
-// const sendEmail = require("../utils/email")
 
 
 exports.registerAdmin = asyncHandler(async (req, res) => {
@@ -68,10 +68,8 @@ exports.loginAdmin = asyncHandler(async (req, res) => {
     await sendEmail({
         to: email,
         subject: `Login otp`,
-        message:
-            `<h1>Do Not your Account OTP</h1>
-             <p>your Login OTP${otp}</p>
-        ` })
+        message: `<h1>Do Not your Account OTP</h1> <p>your Login OTP${otp}</p>`
+    })
     res.json({ message: "Credentials Verify Success OTP Send To Your Registered Email" })
 
 })
@@ -97,6 +95,7 @@ exports.verifyOTP = asyncHandler(async (req, res) => {
     }
 
     const token = jwt.sign({ userId: result._id }, process.env.JWT_KEY, { expiresIn: "1d" })
+
     //JWT
     res.cookie("admin", token, {
         maxAge: 86400000,
